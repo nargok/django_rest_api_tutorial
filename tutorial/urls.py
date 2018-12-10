@@ -21,6 +21,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 urlpatterns = [
     url(r'^', include('snippets.urls')),
     url(r'^obtain_jwt_token', obtain_jwt_token),
+    url(r'^sample_app', include('sample_app.urls')),
 ]
 
 urlpatterns += [
