@@ -6,6 +6,7 @@ from snippets import views
 router = DefaultRouter()
 router.register(r'snippets', views.SnippetViewSet)
 router.register(r'users', views.UserViewSet)
+router.register(r'tags', views.TagViewSet)
 
 urlpatterns = [
   url(r'^', include(router.urls))
