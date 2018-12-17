@@ -32,3 +32,7 @@ class Snippet(models.Model):
     formatter = HtmlFormatter(style=self.style, linenos=linenos, full=True, **opitons)
     self.highlighted = highlight(self.code, lexer, formatter)
     super(Snippet, self).save(*args, **kwargs)
+
+class Tag(models.Model):
+  text = models.CharField(max_length=100)
+  snippets = models.ManyToManyField(Snippet, blank=True, verbose_name='スニペット')
