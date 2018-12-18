@@ -34,6 +34,13 @@ class TagViewSet(viewsets.ModelViewSet):
   serializer_class = TagSerializer
   permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
+  def filter_queryset(self, queryset):
+    queryset = Tag.objects.all()
+    text_params = self.request.query_params.get('text', None)
+    if text_params is not None:
+      queryset = queryset.filter(text__contains=text_params)
+    return queryset
+
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
   """
   This viewset automatically provides list and detail actions.
