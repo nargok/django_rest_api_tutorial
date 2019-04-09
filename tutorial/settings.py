@@ -136,4 +136,5 @@ STATIC_URL = '/static/'
 JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'Bearer',
     'JWT_ALLOW_REFRESH': True,
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'sample_app.views.jwt_response_payload_handler',
 }
