@@ -17,3 +17,7 @@ def test_skip_with_condition():
 @pytest.mark.Smoke
 def test_smoke2():
     assert (1, 2, 3) == (1, 2, 3)
+
+@pytest.mark.Sanity
+def test_sanity():
+    assert (1, 2, 3) == (1, 2, 3)
