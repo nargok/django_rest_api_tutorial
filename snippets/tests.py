@@ -1,3 +1,2 @@
-from django.test import TestCase
-
-# Create your tests here.
+def test_passing():
+    assert (1, 2, 3) == (1, 2, 3)
