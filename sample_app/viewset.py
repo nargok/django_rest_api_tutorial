@@ -7,4 +7,5 @@ class UserViewSet(viewsets.ModelViewSet):
   queryset = User.objects.all()
   serializer_class = UserSerializer
   permission_classes = (permissions.IsAuthenticated,)
+  # TODO認証クラスを変更する
   authentication_classes = (JSONWebTokenAuthentication,)
