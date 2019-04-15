@@ -17,15 +17,18 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     url(r'^', include('snippets.urls')),
-    url(r'^obtain_jwt_token', obtain_jwt_token, name='obtain_jwt_token'),
-    url(r'^api_token_verify', verify_jwt_token),
-    url(r'^api-token-refresh/', refresh_jwt_token),
+    # 認証フレームワークを変更する
+    url(r'^api/token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # url(r'^obtain_jwt_token', obtain_jwt_token, name='obtain_jwt_token'),
+    # url(r'^api_token_verify', verify_jwt_token),
+    # url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^sample_app', include('sample_app.urls')),
     url(r'^docs', schema_view),
 ]
