@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView
 from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_swagger_view(title='Pastebin API')
@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^', include('snippets.urls')),
     # 認証フレームワークを変更する
     url(r'^api/token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^api/token/verify$', TokenVerifyView.as_view(), name='token_verify'),
     # url(r'^obtain_jwt_token', obtain_jwt_token, name='obtain_jwt_token'),
     # url(r'^api_token_verify', verify_jwt_token),
     # url(r'^api-token-refresh/', refresh_jwt_token),
