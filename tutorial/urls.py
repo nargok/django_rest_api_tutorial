@@ -18,13 +18,14 @@ from django.urls import path
 from django.conf.urls import url, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView, TokenRefreshView
 from rest_framework_swagger.views import get_swagger_view
+from sample_app.views import MyTokenObtainPairView
 
 schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     url(r'^', include('snippets.urls')),
     # 認証フレームワークを変更する
-    url(r'^api/token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^api/token/$', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     url(r'^api/token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
     url(r'^api/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
     url(r'^sample_app', include('sample_app.urls')),

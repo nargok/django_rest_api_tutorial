@@ -1,7 +1,16 @@
-from sample_app.serializers import UserSerializer
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-def jwt_response_payload_handler(token, user=None, request=None):
-  return {
-    'token': token,
-    'user': UserSerializer(user, context={'request': request}).data
-  }
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+  @classmethod
+  def get_token(cls, user):
+    token = super().get_token(user)
+
+    # customize payload
+    token['name'] = user.username
+    token['is_superuser'] = user.is_superuser
+
+    return token
+
+class MyTokenObtainPairView(TokenObtainPairView):
+  serializer_class = MyTokenObtainPairSerializer
