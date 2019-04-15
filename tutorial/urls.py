@@ -23,7 +23,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     url(r'^', include('snippets.urls')),
-    url(r'^obtain_jwt_token', obtain_jwt_token),
+    url(r'^obtain_jwt_token', obtain_jwt_token, name='obtain_jwt_token'),
     url(r'^api_token_verify', verify_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^sample_app', include('sample_app.urls')),
