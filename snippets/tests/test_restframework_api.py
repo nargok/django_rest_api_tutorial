@@ -17,7 +17,7 @@ class TestObtainAccessToken(APITestCase):
       'password': 'password',
     }
 
-    url = reverse('obtain_jwt_token')
+    url = reverse('token_obtain_pair')
     response = self.client.post(url,
                                 data=json.dumps(self.valid_payload),
                                 content_type='application/json')
