@@ -1,6 +1,8 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.utils import timezone
+from datetime import timedelta
+from calendar import timegm
 
 class TokenUserTypeOneSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -9,7 +11,12 @@ class TokenUserTypeOneSerializer(TokenObtainPairSerializer):
 
         token['name'] = user.username
         token['user_one'] = user.id
-        token['start_datetime'] = timezone.now
+
+        # 有効日時をoverride
+        now = timezone.now()
+        expired = now + timedelta(minutes=10)
+        token['start_datetime'] = timegm(now.utctimetuple())
+        token['exp'] = timegm(expired.utctimetuple())
 
         return token
 
@@ -25,8 +32,12 @@ class TokenUserTypeTwoSerializer(TokenObtainPairSerializer):
         token['name'] = user.username
         token['user_two'] = user.id
         token['user_two_action'] = 'get_list'
-        token['start_datetime'] = timezone.now
 
+        # 有効日時をoverride
+        now = timezone.now()
+        expired = now + timedelta(minutes=15)
+        token['start_datetime'] = timegm(now.utctimetuple())
+        token['exp'] = timegm(expired.utctimetuple())
 
         return token
 
