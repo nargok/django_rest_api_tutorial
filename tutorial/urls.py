@@ -19,7 +19,7 @@ from django.conf.urls import url, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView, TokenRefreshView
 from rest_framework_swagger.views import get_swagger_view
 from sample_app.views import MyTokenObtainPairView
-from tutorial.views import TokenUserTypeOneView, TokenUserTypeTwoView
+from tutorial.views import TokenForUserView, TokenUserTypeTwoView
 
 schema_view = get_swagger_view(title='Pastebin API')
 
@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^api/token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
     url(r'^api/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
     # 認証トークンをカスタマイズする
-    url(r'^api/token/user_type_one/$', TokenUserTypeOneView.as_view(), name='token_obtain_type_one'),
+    url(r'^api/token/user_type_one/$', TokenForUserView.as_view(), name='token_obtain_type_one'),
     url(r'^api/token/user_type_two/$', TokenUserTypeTwoView.as_view(), name='token_obtain_type_two'),
     url(r'^sample_app', include('sample_app.urls')),
     url(r'^docs', schema_view),

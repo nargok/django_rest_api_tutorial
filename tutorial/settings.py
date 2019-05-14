@@ -130,7 +130,7 @@ STATIC_URL = '/static/'
 #         'rest_framework.permissions.IsAuthenticated',
 #     ),
 #     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#         'rest_framework_jwSt.authentication.JSONWebTokenAuthentication',
 #     ),
 # }
 
