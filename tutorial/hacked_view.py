@@ -4,8 +4,8 @@ from rest_framework import exceptions, serializers
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import PasswordField
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.settings import api_settings
 
 User = get_user_model()
 
@@ -81,10 +81,52 @@ class MyTokenObtainPairSerializer(MyTokenObtainSerializer):
 
         return data
 
+
+class MyTokenRefreshSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+    # override start
+    app_id = serializers.CharField()
+    # override end
+
+    def validate(self, attrs):
+        refresh = RefreshToken(attrs['refresh'])
+
+        data = {'access': str(refresh.access_token)}
+
+        # override start
+        if attrs['app_id'] != 'ENGLISH':
+            # 403を返す
+            raise exceptions.PermissionDenied(detail="app_id is not correct. Please confirm.")
+        # override end
+
+        if api_settings.ROTATE_REFRESH_TOKENS:
+            if api_settings.BLACKLIST_AFTER_ROTATION:
+                try:
+                    # Attempt to blacklist the given refresh token
+                    refresh.blacklist()
+                except AttributeError:
+                    # If blacklist app not installed, `blacklist` method will
+                    # not be present
+                    pass
+
+            refresh.set_jti()
+            refresh.set_exp()
+
+            data['refresh'] = str(refresh)
+
+        return data
+
+
 # ログインAPI用のView
 class MyLoginView(TokenObtainPairView):
     """
-    ログイン認証用API
+    ログイン認証API
     """
     serializer_class = MyTokenObtainPairSerializer
 
+
+class MyTokenRefreshView(TokenRefreshView):
+    """
+    トークンリフレッシュAPI
+    """
+    serializer_class = MyTokenRefreshSerializer

@@ -28,7 +28,7 @@ from sample_app.views import MyTokenObtainPairView
 from tutorial.views import TokenForUserView, TokenUserTypeTwoView
 
 # hackしたView
-from .hacked_view import MyLoginView
+from .hacked_view import MyLoginView, MyTokenRefreshView
 
 schema_view = get_swagger_view(title='Pastebin API')
 
@@ -41,7 +41,8 @@ urlpatterns = [
     # url(r'^api/token/$', TokenObtainSlidingView.as_view(), name='token_obtain_pair'),
     url(r'^api/token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
     # スライドトークンの実験
-    url(r'^api/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
+    url(r'^api/token/refresh/$', MyTokenRefreshView.as_view(), name='token_refresh'),
+    # url(r'^api/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
     # url(r'^api/token/refresh/$', TokenRefreshSlidingView.as_view(), name='token_refresh'),
 
     # 認証トークンをカスタマイズする
