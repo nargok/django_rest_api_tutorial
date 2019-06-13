@@ -16,19 +16,34 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenVerifyView, TokenRefreshView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenVerifyView,
+    TokenRefreshView,
+    TokenObtainSlidingView,
+    TokenRefreshSlidingView
+)
 from rest_framework_swagger.views import get_swagger_view
 from sample_app.views import MyTokenObtainPairView
 from tutorial.views import TokenForUserView, TokenUserTypeTwoView
+
+# hackしたView
+from .hacked_view import MyLoginView
 
 schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     url(r'^', include('snippets.urls')),
     # 認証フレームワークを変更する
-    url(r'^api/token/$', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # スライドトークンの実験
+    url(r'^api/token/$', MyLoginView.as_view(), name='token_obtain_pair'),
+    # url(r'^api/token/$', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # url(r'^api/token/$', TokenObtainSlidingView.as_view(), name='token_obtain_pair'),
     url(r'^api/token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
+    # スライドトークンの実験
     url(r'^api/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
+    # url(r'^api/token/refresh/$', TokenRefreshSlidingView.as_view(), name='token_refresh'),
+
     # 認証トークンをカスタマイズする
     url(r'^api/token/user_type_one/$', TokenForUserView.as_view(), name='token_obtain_type_one'),
     url(r'^api/token/user_type_two/$', TokenUserTypeTwoView.as_view(), name='token_obtain_type_two'),
