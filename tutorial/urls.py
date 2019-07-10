@@ -25,6 +25,7 @@ from rest_framework_simplejwt.views import (
 )
 from rest_framework_swagger.views import get_swagger_view
 from sample_app.views import MyTokenObtainPairView
+from snippets.views import MockTestAPIView
 from tutorial.views import TokenForUserView, TokenUserTypeTwoView
 
 # hackしたView
@@ -48,6 +49,7 @@ urlpatterns = [
     # 認証トークンをカスタマイズする
     url(r'^api/token/user_type_one/$', TokenForUserView.as_view(), name='token_obtain_type_one'),
     url(r'^api/token/user_type_two/$', TokenUserTypeTwoView.as_view(), name='token_obtain_type_two'),
+    url(r'^api/hello/sample/$', MockTestAPIView.as_view(), name='hello_sample'),
     url(r'^sample_app', include('sample_app.urls')),
     url(r'^docs', schema_view),
 ]

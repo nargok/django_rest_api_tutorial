@@ -140,3 +140,8 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'sample_app.views.jwt_response_payload_handler',
 }
+
+SIMPLE_JWT = {
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=8),
+    'ROTATE_REFRESH_TOKENS': True,
+}

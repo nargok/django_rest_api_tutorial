@@ -4,6 +4,7 @@ from rest_framework import generics, permissions, renderers
 from rest_framework.decorators import api_view, detail_route
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.views import APIView
 
 from snippets.models import Snippet, Tag
 from snippets.serializers import SnippetSerializer, UserSerializer, TagSerializer
@@ -62,3 +63,14 @@ class SnippetHighlight(generics.GenericAPIView):
   def get(self, request, *args, **kwargs):
     snippet = self.get_object()
     return Response(snippet.highlighted)
+
+from snippets.tests.access_google import sample
+
+class MockTestAPIView(APIView):
+  def get(self, request):
+    response = sample()
+    return Response({
+      'text': 'hello',
+      'statusCodeFromGoogle': response['statusCode'],
+      'ipFromGoogle': response['ip']
+      })

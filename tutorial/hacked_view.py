@@ -112,6 +112,13 @@ class MyTokenRefreshSerializer(serializers.Serializer):
             refresh.set_jti()
             refresh.set_exp()
 
+            # override start(\( ⁰⊖⁰)/)
+            # access_tokenにstudent_uuidをつめる
+            access = refresh.access_token
+            access['student_uuid'] = '029183-73638-uuid~~'
+            data['access'] = str(access)
+            # override end ٩( 'ω' )و
+
             data['refresh'] = str(refresh)
 
         return data
