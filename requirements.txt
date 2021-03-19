@@ -10,7 +10,7 @@ decorator==4.4.0
 Django==2.1.4
 django-filter==2.0.0
 django-rest-swagger==2.2.0
-djangorestframework==3.9.0
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 djangorestframework-simplejwt==4.2.0
 get==2019.3.22
@@ -60,7 +60,7 @@ decorator==4.4.0
 Django==2.1.4
 django-filter==2.0.0
 django-rest-swagger==2.2.0
-djangorestframework==3.9.0
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 djangorestframework-simplejwt==4.2.0
 get==2019.3.22
