@@ -19,7 +19,7 @@ ipython==7.4.0
 ipython-genutils==0.2.0
 itypes==1.1.0
 jedi==0.13.3
-Jinja2==2.10
+Jinja2==2.11.3
 jsonpath==0.81
 MarkupSafe==1.1.0
 more-itertools==7.0.0
@@ -69,7 +69,7 @@ ipython==7.4.0
 ipython-genutils==0.2.0
 itypes==1.1.0
 jedi==0.13.3
-Jinja2==2.10
+Jinja2==2.11.3
 jsonpath==0.81
 MarkupSafe==1.1.0
 more-itertools==7.0.0
