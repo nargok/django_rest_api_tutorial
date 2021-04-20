@@ -32,7 +32,7 @@ post==2019.3.22
 prompt-toolkit==2.0.9
 ptyprocess==0.6.0
 public==2019.3.22
-py==1.8.0
+py==1.10.0
 Pygments==2.3.0
 PyJWT==1.7.1
 pytest==4.4.0
@@ -82,7 +82,7 @@ post==2019.3.22
 prompt-toolkit==2.0.9
 ptyprocess==0.6.0
 public==2019.3.22
-py==1.8.0
+py==1.10.0
 Pygments==2.3.0
 PyJWT==1.7.1
 pytest==4.4.0
